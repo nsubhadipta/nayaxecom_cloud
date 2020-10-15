@@ -285,14 +285,14 @@ class CategoryController extends Controller
       return response($output, 200);
     }
 
-    //Create Category and Subcategory in same Api
+    //Create Category and Subcategory in same Api(like insert Batch in codeigniter)
     public function createcategorytest(Request $request) {
         $cat = new category;
         $cat->name = $request->name;        
         $cat->description = $request->description;
         $cat->thumbnail = $request->thumbnail;
         
-        //Save The category Now
+        //Create Category
        $cat->save();
         
         foreach ($request->sub_catagories as $sub_cat) {
