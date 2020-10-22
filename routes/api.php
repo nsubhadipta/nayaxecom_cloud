@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 
 
 /*
@@ -37,6 +38,7 @@ Route::post('/login',array('middleware' => 'cors','uses'=>'UserController@login'
 Route::get('/getUserDetails/{id}', array('middleware' => 'cors','uses'=>'UserController@getUserDetails'));
 Route::post('/AddUserDetails/{user_id}', array('middleware' => 'cors','uses'=>'UserController@AddUserDetails'));
 Route::delete('/deleteUserDetails/{id}',array('middleware' => 'cors','uses'=>'UserController@deleteUserDetails' ));
+Route::put('/editUserDetails/{id}',array('middleware' => 'cors','uses'=>'UserController@updateUser_details' ));
 
 
 
@@ -70,11 +72,21 @@ Route::put('/editProduct/{id}',array('middleware' => 'cors','uses'=>'ProductCont
 
 Route::get('/getCartDetails/{uid}', array('middleware' => 'cors','uses'=>'CartController@getCart')); 
 Route::post('/cart', array('middleware' => 'cors','uses'=>'CartController@cart')); 
+Route::delete('/deleteCart/{id}', array('middleware' => 'cors','uses'=>'CartController@deleteCartItem')); 
 
 
 Route::post('/order', array('middleware' => 'cors','uses'=>'OrderController@createOrder'));   
 
 
+
+
+
+Route::post('/addPayment', array('middleware' => 'cors','uses'=>'PaymentController@createPayment'));   
+Route::get('/getAllPayments', array('middleware' => 'cors','uses'=>'PaymentController@getAllPayments'));   
+Route::put('/editPayments/{id}', array('middleware' => 'cors','uses'=>'PaymentController@updatePayment'));   
+Route::delete('/deletePayments/{id}', array('middleware' => 'cors','uses'=>'PaymentController@deletePayment'));   
+
+ 
 
 
 

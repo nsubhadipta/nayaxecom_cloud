@@ -84,19 +84,19 @@ class UserController extends Controller
 	      }
   	}
 
-  public function AddUserDetails(Request $request, $user_id) {
-    $employe = new user_detail;
-    $employe->user_id = $user_id;
-    $employe->phone = $request->phone;
-    $employe->address = $request->address;
-    $employe->city = $request->city;
-    $employe->zip = $request->zip;
-    $employe->save();
+	public function AddUserDetails(Request $request, $user_id) {
+		$employe = new user_detail;
+		$employe->user_id = $user_id;
+		$employe->phone = $request->phone;
+		$employe->address = $request->address;
+		$employe->city = $request->city;
+		$employe->zip = $request->zip;
+		$employe->save();
 
-    return response()->json([
-        "message" => "User Details record created"
-    ], 201);
-  }
+		return response()->json([
+			"message" => "User Details record created"
+		], 201);
+	}
   
 
   	public function deleteUserDetails ($id) {
@@ -116,4 +116,38 @@ class UserController extends Controller
 	  
 
 	//   $name = $request->query('name', 'Helen');
+
+
+
+
+	public function updateUser_details(Request $request, $id) {
+		if (user_detail::where('id', $id)->exists()) {
+			$user_dtl = user_detail::find($id);
+			$user_dtl->user_id = is_null($request->user_id) ? $user_dtl->user_id : $request->user_id;
+			$user_dtl->phone = is_null($request->phone) ? $user_dtl->phone : $request->phone;
+			$user_dtl->address= is_null($request->address) ? $user_dtl->address : $request->address;
+			$user_dtl->city = is_null($request->city) ? $user_dtl->city : $request->city;
+			$user_dtl->zip = is_null($request->zip) ? $user_dtl->zip : $request->zip;
+			$user_dtl->save();
+
+			return response()->json([
+				"message" => "User Details updated successfully"
+			], 200);
+			} else {
+			return response()->json([
+				"message" => "User Details not found"
+			], 404);
+			
+		}
+	}
+
+
+
+
+
 }
+
+
+
+
+	

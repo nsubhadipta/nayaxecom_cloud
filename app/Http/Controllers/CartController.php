@@ -64,7 +64,7 @@ class CartController extends Controller
 		}
     }
 
-
+	
     public function getCart($uid) {
 	    if (cart::where('user_id', $uid)->exists() && cart::where('status', 1)->count()>0) {
 			$user = cart::where('user_id', $uid)
@@ -82,5 +82,25 @@ class CartController extends Controller
 
 		}
   	}
+
+	public function deleteCartItem ($id) {
+		if(cart::where('id', $id)->exists()) {
+			$cart = cart::find($id);
+			$cart->delete();
+		
+			return response()->json([
+			"message" => "Cartitems deleted"
+			], 202);
+		} else {
+			return response()->json([
+			"message" => "Cartitems not found"
+				], 404);
+			}
+	}
+	 
+
+
+
+
 
 }
